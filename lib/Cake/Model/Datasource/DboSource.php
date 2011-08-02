@@ -455,7 +455,7 @@ class DboSource extends DataSource {
 				return array_search(false, $result) === false;
 			}
 		}
-
+		
 		try {
 			$query = $this->_connection->prepare($sql, $prepareOptions);
 			$query->setFetchMode(PDO::FETCH_LAZY);
@@ -472,6 +472,7 @@ class DboSource extends DataSource {
 			return $query;
 		} catch (PDOException $e) {
 			$this->_results = null;
+			debug($e->getMessage());
 			$this->error = $e->getMessage();
 			return false;
 		}
